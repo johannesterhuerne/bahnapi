@@ -47,7 +47,6 @@ class bahnapi{
 	public function searchNextTrains($time, $dateBegin, $dateEnd, $stationId, $productFilter = '1111100000000000'){
 		$this->requestData = '<?xml version="1.0" encoding="UTF-8" ?><ReqC ver="1.1" prod="JP" lang="DE" clientVersion="2.2.11"><STBReq boardType="DEP" detailLevel="2"><Time>'.date('H:i', $time).'</Time><Period><DateBegin>'.date('Ymd', $dateBegin).'</DateBegin><DateEnd>'.date('Ymd', $dateEnd).'</DateEnd></Period><TableStation externalId="'.utf8_encode($stationId).'"/><ProductFilter>'.utf8_encode($productFilter).'</ProductFilter></STBReq></ReqC>';
 		$this->requestUrl = 'http://reiseauskunft.bahn.de/bin/mgate.exe';
-		var_dump($this->doRequest());
 		$this->trains = simplexml_load_string($this->doRequest());
 		if(isset($this->trains)){
 			return $this->trains;
